@@ -13,6 +13,9 @@ class AppDatabase {
       email: 'demo@easymart.app',
       password: '123456',
       role: 'user',
+      address: '123 Main St, Makati, Manila',
+      latitude: 14.5547,
+      longitude: 121.0244,
     ),
     User(
       id: 'admin1',
@@ -20,12 +23,15 @@ class AppDatabase {
       email: 'admin@easymart.app',
       password: '123456',
       role: 'admin',
+      address: 'Admin Office',
+      latitude: 14.5995,
+      longitude: 120.9842,
     ),
   ];
 
   static User? currentUser;
 
-  static const List<Product> products = [
+  static final List<Product> products = [
     Product(
       id: 'p1',
       name: 'Fresh Red Apples',
@@ -114,27 +120,212 @@ class AppDatabase {
       unit: 'pcs',
       description: 'Fresh seafood for Filipino meals.',
     ),
+    Product(
+      id: 'p9',
+      name: 'Carrots',
+      category: 'Vegetables',
+      imageUrl:
+          'https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=900&q=80',
+      price: 53.00,
+      packSize: 10,
+      unit: 'pcs',
+      description: 'Crunchy carrots for soups and salads.',
+    ),
+    Product(
+      id: 'p10',
+      name: 'Coconut Water',
+      category: 'Beverages',
+      imageUrl:
+          'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=900&q=80',
+      price: 42.00,
+      packSize: 6,
+      unit: 'bottle',
+      description: 'Refreshing and natural hydration.',
+    ),
+    Product(
+      id: 'p11',
+      name: 'Pork Chops',
+      category: 'Meat',
+      imageUrl:
+          'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80',
+      price: 210.00,
+      packSize: 4,
+      unit: 'pcs',
+      description: 'Tender pork cuts for family dinners.',
+    ),
+    Product(
+      id: 'p12',
+      name: 'Bread Loaf',
+      category: 'Bakery',
+      imageUrl:
+          'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
+      price: 70.00,
+      packSize: 1,
+      unit: 'loaf',
+      description: 'Soft and fresh loaf for breakfast.',
+    ),
+    Product(
+      id: 'p13',
+      name: 'Bottled Water',
+      category: 'Beverages',
+      imageUrl:
+          'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=900&q=80',
+      price: 28.00,
+      packSize: 12,
+      unit: 'bottle',
+      description: 'Clean and refreshing everyday hydration.',
+    ),
+    Product(
+      id: 'p14',
+      name: 'Laundry Detergent',
+      category: 'Household',
+      imageUrl:
+          'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80',
+      price: 155.00,
+      packSize: 1,
+      unit: 'pack',
+      description: 'Powerful cleaning for every wash.',
+    ),
+    Product(
+      id: 'p15',
+      name: 'Toilet Paper',
+      category: 'Household',
+      imageUrl:
+          'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
+      price: 130.00,
+      packSize: 12,
+      unit: 'rolls',
+      description: 'Soft and absorbent daily essentials.',
+    ),
   ];
 
   static final List<CartItem> cartItems = [];
+
   static final List<Order> orders = [
     Order(
       id: 'ord1',
       userId: 'u1',
-      items: [],
-      totalAmount: 450.00,
+      items: [
+        CartItem(
+          productId: 'p1',
+          name: 'Fresh Red Apples',
+          price: 89,
+          quantity: 2,
+          imageUrl:
+              'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=900&q=80',
+        ),
+        CartItem(
+          productId: 'p6',
+          name: 'Tomatoes',
+          price: 68,
+          quantity: 1,
+          imageUrl:
+              'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=900&q=80',
+        ),
+      ],
+      totalAmount: 246.00,
       status: 'Delivered',
-      createdAt: DateTime.now().subtract(const Duration(days: 2)),
+      createdAt: DateTime.now().subtract(const Duration(days: 7)),
+      deliveryAddress: '123 Main St, Makati, Manila',
+      driverLat: 14.5540,
+      driverLng: 121.0250,
+      eta: 0,
     ),
     Order(
       id: 'ord2',
       userId: 'u1',
-      items: [],
-      totalAmount: 320.00,
-      status: 'Pending',
-      createdAt: DateTime.now().subtract(const Duration(days: 1)),
+      items: [
+        CartItem(
+          productId: 'p3',
+          name: 'Rice 5kg',
+          price: 245,
+          quantity: 1,
+          imageUrl:
+              'https://images.unsplash.com/photo-1586201375761-83865001e31d?auto=format&fit=crop&w=900&q=80',
+        ),
+        CartItem(
+          productId: 'p13',
+          name: 'Bottled Water',
+          price: 28,
+          quantity: 3,
+          imageUrl:
+              'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=900&q=80',
+        ),
+      ],
+      totalAmount: 329.00,
+      status: 'In Transit',
+      createdAt: DateTime.now().subtract(const Duration(days: 4)),
+      deliveryAddress: '123 Main St, Makati, Manila',
+      driverLat: 14.5551,
+      driverLng: 121.0190,
+      eta: 18,
+    ),
+    Order(
+      id: 'ord3',
+      userId: 'u1',
+      items: [
+        CartItem(
+          productId: 'p4',
+          name: 'Chicken Breast',
+          price: 180,
+          quantity: 2,
+          imageUrl:
+              'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80',
+        ),
+        CartItem(
+          productId: 'p10',
+          name: 'Coconut Water',
+          price: 42,
+          quantity: 2,
+          imageUrl:
+              'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=900&q=80',
+        ),
+      ],
+      totalAmount: 444.00,
+      status: 'Delivered',
+      createdAt: DateTime.now().subtract(const Duration(days: 14)),
+      deliveryAddress: '123 Main St, Makati, Manila',
+      driverLat: 14.5600,
+      driverLng: 121.0150,
+      eta: 0,
     ),
   ];
+
+  static double get totalSpentThisWeek {
+    final now = DateTime.now();
+    return orders
+        .where((order) =>
+            order.userId == currentUser?.id &&
+            order.createdAt.isAfter(now.subtract(const Duration(days: 7))))
+        .fold(0.0, (sum, order) => sum + order.totalAmount);
+  }
+
+  static double get totalSpentThisMonth {
+    final now = DateTime.now();
+    return orders
+        .where((order) =>
+            order.userId == currentUser?.id &&
+            order.createdAt.isAfter(now.subtract(const Duration(days: 30))))
+        .fold(0.0, (sum, order) => sum + order.totalAmount);
+  }
+
+  static int get weeklyOrderCount {
+    final now = DateTime.now();
+    return orders
+        .where((order) =>
+            order.userId == currentUser?.id &&
+            order.createdAt.isAfter(now.subtract(const Duration(days: 7))))
+        .length;
+  }
+
+  static int get monthlyOrderCount {
+    final now = DateTime.now();
+    return orders
+        .where((order) =>
+            order.userId == currentUser?.id &&
+            order.createdAt.isAfter(now.subtract(const Duration(days: 30))))
+        .length;
+  }
 
   static void addToCart(Product product) {
     final index = cartItems.indexWhere((item) => item.productId == product.id);
@@ -167,7 +358,7 @@ class AppDatabase {
       );
       currentUser = user;
       return user;
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }
@@ -179,6 +370,9 @@ class AppDatabase {
       email: email,
       password: password,
       role: 'user',
+      address: 'Enter your delivery address',
+      latitude: 14.5547,
+      longitude: 121.0244,
     );
     users.add(newUser);
     currentUser = newUser;
@@ -197,6 +391,9 @@ class User {
   final String email;
   final String password;
   final String role;
+  String address;
+  double latitude;
+  double longitude;
 
   User({
     required this.id,
@@ -204,6 +401,9 @@ class User {
     required this.email,
     required this.password,
     required this.role,
+    required this.address,
+    required this.latitude,
+    required this.longitude,
   });
 }
 
@@ -254,8 +454,12 @@ class Order {
   final String userId;
   final List<CartItem> items;
   final double totalAmount;
-  final String status;
+  String status;
   final DateTime createdAt;
+  final String deliveryAddress;
+  double driverLat;
+  double driverLng;
+  int eta;
 
   Order({
     required this.id,
@@ -264,6 +468,10 @@ class Order {
     required this.totalAmount,
     required this.status,
     required this.createdAt,
+    required this.deliveryAddress,
+    required this.driverLat,
+    required this.driverLng,
+    required this.eta,
   });
 }
 
@@ -282,8 +490,8 @@ class EasyMartApp extends StatelessWidget {
 }
 
 class AppTheme {
-  static const Color primary = Color(0xFF1EBB68);
-  static const Color primaryDark = Color(0xFF138F53);
+  static const Color primary = Color(0xFFFF8C00);
+  static const Color primaryDark = Color(0xFF001F3F);
   static const Color background = Color(0xFFF5F7F8);
   static const Color text = Color(0xFF1B1D1F);
   static const Color muted = Color(0xFF6B7280);
@@ -390,41 +598,71 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 28),
               Container(
-                width: 90,
-                height: 90,
+                width: 160,
+                height: 160,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAFBF3),
-                  borderRadius: BorderRadius.circular(28),
+                  color: AppTheme.primaryDark,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                child: const Icon(
-                  Icons.local_grocery_store_rounded,
-                  size: 52,
-                  color: AppTheme.primary,
+                child: Center(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'E',
+                        style: TextStyle(
+                          fontSize: 86,
+                          fontWeight: FontWeight.w900,
+                          color: AppTheme.primary,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 20,
+                        right: 16,
+                        child: Container(
+                          width: 34,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppTheme.primary, width: 2),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.shopping_cart,
+                            size: 16,
+                            color: AppTheme.primary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(height: 22),
+              const SizedBox(height: 16),
               const Text(
-                'Welcome to EasyMart',
+                'EasyMart',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 42,
                   fontWeight: FontWeight.w800,
+                  color: AppTheme.primaryDark,
                 ),
               ),
-              const SizedBox(height: 8),
               const Text(
-                'Fresh groceries delivered to your home',
+                'Easy Shop, Smart Choice',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
+                  letterSpacing: 1.1,
                   color: AppTheme.muted,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 30),
               if (_errorMessage != null)
                 Container(
                   padding: const EdgeInsets.all(12),
@@ -501,6 +739,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -518,6 +757,8 @@ class UserDashboard extends StatefulWidget {
 
 class _UserDashboardState extends State<UserDashboard> {
   int _selectedIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
+  String _selectedCategory = 'All';
 
   void _addToCart(Product product) {
     AppDatabase.addToCart(product);
@@ -530,11 +771,24 @@ class _UserDashboardState extends State<UserDashboard> {
     );
   }
 
+  List<Product> get _filteredProducts {
+    final query = _searchController.text.toLowerCase();
+    final items = AppDatabase.products.where((product) {
+      final matchesCategory =
+          _selectedCategory == 'All' || product.category == _selectedCategory;
+      final matchesQuery =
+          query.isEmpty || product.name.toLowerCase().contains(query);
+      return matchesCategory && matchesQuery;
+    }).toList();
+    return items;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('EasyMart'),
+        elevation: 2,
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
@@ -567,6 +821,8 @@ class _UserDashboardState extends State<UserDashboard> {
   }
 
   Widget _buildShopScreen() {
+    final categories = <String>['All', ...AppDatabase.products.map((e) => e.category).toSet()];
+
     return Column(
       children: [
         Container(
@@ -574,12 +830,12 @@ class _UserDashboardState extends State<UserDashboard> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22),
-            gradient: const LinearGradient(
-              colors: [AppTheme.primary, Color(0xFF149F62)],
+            gradient: LinearGradient(
+              colors: [AppTheme.primary, const Color(0xFFFFA500)],
             ),
           ),
-          child: const Row(
-            children: [
+          child: Row(
+            children: const [
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -615,6 +871,8 @@ class _UserDashboardState extends State<UserDashboard> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TextField(
+            controller: _searchController,
+            onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
               hintText: 'Search groceries',
               prefixIcon: const Icon(Icons.search),
@@ -627,11 +885,41 @@ class _UserDashboardState extends State<UserDashboard> {
             ),
           ),
         ),
+        const SizedBox(height: 12),
+        SizedBox(
+          height: 40,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              final category = categories[index];
+              final selected = _selectedCategory == category;
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: ChoiceChip(
+                  label: Text(category),
+                  selected: selected,
+                  onSelected: (_) {
+                    setState(() {
+                      _selectedCategory = category;
+                    });
+                  },
+                  selectedColor: AppTheme.primary,
+                  labelStyle: TextStyle(
+                    color: selected ? Colors.white : AppTheme.primaryDark,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
         const SizedBox(height: 16),
         Expanded(
           child: GridView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            itemCount: AppDatabase.products.length,
+            itemCount: _filteredProducts.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.72,
@@ -639,7 +927,7 @@ class _UserDashboardState extends State<UserDashboard> {
               mainAxisSpacing: 14,
             ),
             itemBuilder: (context, index) {
-              final product = AppDatabase.products[index];
+              final product = _filteredProducts[index];
               return ProductCard(
                 product: product,
                 onAdd: () => _addToCart(product),
@@ -696,9 +984,9 @@ class _UserDashboardState extends State<UserDashboard> {
   }
 
   Widget _buildProfileScreen() {
-    return Center(
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             width: 80,
@@ -723,7 +1011,121 @@ class _UserDashboardState extends State<UserDashboard> {
             AppDatabase.currentUser?.email ?? '',
             style: const TextStyle(color: AppTheme.muted),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: SummaryCard(
+                  title: 'This Week',
+                  value: '₱${AppDatabase.totalSpentThisWeek.toStringAsFixed(2)}',
+                  subtitle: '${AppDatabase.weeklyOrderCount} orders',
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: SummaryCard(
+                  title: 'This Month',
+                  value: '₱${AppDatabase.totalSpentThisMonth.toStringAsFixed(2)}',
+                  subtitle: '${AppDatabase.monthlyOrderCount} orders',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Delivery Address',
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    AppDatabase.currentUser?.address ?? 'No address set',
+                    style: const TextStyle(color: AppTheme.muted),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const AddressScreen(),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.edit),
+                      label: const Text('Update Address'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.primary,
+                        foregroundColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'Recent Orders Summary',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+            ),
+          ),
+          const SizedBox(height: 12),
+          ...AppDatabase.orders
+              .where((order) => order.userId == AppDatabase.currentUser?.id)
+              .take(3)
+              .map(
+                (order) => Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(14),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Order #${order.id}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  order.status,
+                                  style: const TextStyle(
+                                    color: AppTheme.muted,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            '₱${order.totalAmount.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: AppTheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          const SizedBox(height: 20),
           ElevatedButton.icon(
             onPressed: () {
               AppDatabase.logout();
@@ -740,6 +1142,124 @@ class _UserDashboardState extends State<UserDashboard> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class SummaryCard extends StatelessWidget {
+  final String title;
+  final String value;
+  final String subtitle;
+
+  const SummaryCard({
+    required this.title,
+    required this.value,
+    required this.subtitle,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: AppTheme.muted,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+                color: AppTheme.primaryDark,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              subtitle,
+              style: const TextStyle(
+                color: AppTheme.muted,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AddressScreen extends StatefulWidget {
+  const AddressScreen({super.key});
+
+  @override
+  State<AddressScreen> createState() => _AddressScreenState();
+}
+
+class _AddressScreenState extends State<AddressScreen> {
+  late TextEditingController _addressController;
+
+  @override
+  void initState() {
+    super.initState();
+    _addressController =
+        TextEditingController(text: AppDatabase.currentUser?.address ?? '');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Update Address')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: _addressController,
+              maxLines: 4,
+              decoration: const InputDecoration(
+                labelText: 'Delivery Address',
+                hintText: 'Enter your complete address',
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (AppDatabase.currentUser != null) {
+                    AppDatabase.currentUser!.address = _addressController.text;
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Address updated successfully'),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.primary,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                child: const Text('Save Address'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -995,6 +1515,11 @@ class OrderDetailScreen extends StatelessWidget {
                       style: const TextStyle(color: AppTheme.muted),
                     ),
                     const SizedBox(height: 12),
+                    Text(
+                      'Address: ${order.deliveryAddress}',
+                      style: const TextStyle(color: AppTheme.muted),
+                    ),
+                    const SizedBox(height: 12),
                     const Divider(),
                     const SizedBox(height: 12),
                     Text(
@@ -1009,7 +1534,7 @@ class OrderDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            if (order.status == 'Pending')
+            if (order.status != 'Delivered')
               SizedBox(
                 width: double.infinity,
                 height: 52,
@@ -1018,12 +1543,12 @@ class OrderDetailScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const OrderTrackingScreen(),
+                        builder: (_) => OrderTrackingScreen(order: order),
                       ),
                     );
                   },
                   icon: const Icon(Icons.location_on_outlined),
-                  label: const Text('Track Order'),
+                  label: const Text('Track Order on Map'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primary,
                     foregroundColor: Colors.white,
@@ -1041,58 +1566,72 @@ class OrderDetailScreen extends StatelessWidget {
 }
 
 class OrderTrackingScreen extends StatefulWidget {
-  const OrderTrackingScreen({super.key});
+  final Order order;
+  const OrderTrackingScreen({required this.order, super.key});
 
   @override
   State<OrderTrackingScreen> createState() => _OrderTrackingScreenState();
 }
 
 class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
-  static const LatLng _center = LatLng(14.5995, 120.9842);
-
-  final Map<MarkerId, Marker> _markers = {
-    const MarkerId('driver'): const Marker(
-      markerId: MarkerId('driver'),
-      position: LatLng(14.5986, 120.9842),
-      infoWindow: InfoWindow(title: 'Driver'),
-    ),
-    const MarkerId('customer'): const Marker(
-      markerId: MarkerId('customer'),
-      position: LatLng(14.6010, 120.9809),
-      infoWindow: InfoWindow(title: 'Your place'),
-    ),
-  };
+  late GoogleMapController mapController;
 
   @override
   Widget build(BuildContext context) {
+    final order = widget.order;
+    final userLat = AppDatabase.currentUser?.latitude ?? 14.5547;
+    final userLng = AppDatabase.currentUser?.longitude ?? 121.0244;
+    final driverLat = order.driverLat;
+    final driverLng = order.driverLng;
+
+    final Map<MarkerId, Marker> markers = {
+      const MarkerId('driver'): Marker(
+        markerId: const MarkerId('driver'),
+        position: LatLng(driverLat, driverLng),
+        infoWindow: const InfoWindow(title: 'Driver Location'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueOrange,
+        ),
+      ),
+      const MarkerId('customer'): Marker(
+        markerId: const MarkerId('customer'),
+        position: LatLng(userLat, userLng),
+        infoWindow: const InfoWindow(title: 'Your Delivery Address'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueGreen,
+        ),
+      ),
+    };
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Track delivery')),
+      appBar: AppBar(title: const Text('Track Your Order')),
       body: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(16),
             color: Colors.white,
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'ETA to your address',
                       style: TextStyle(fontSize: 16, color: AppTheme.muted),
                     ),
-                    SizedBox(height: 6),
+                    const SizedBox(height: 6),
                     Text(
-                      '18 minutes',
-                      style: TextStyle(
+                      '${order.eta} minutes',
+                      style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w800,
+                        color: AppTheme.primary,
                       ),
                     ),
                   ],
                 ),
-                Icon(
+                const Icon(
                   Icons.directions_car_filled,
                   size: 38,
                   color: AppTheme.primary,
@@ -1102,34 +1641,48 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
           ),
           Expanded(
             child: GoogleMap(
-              initialCameraPosition: const CameraPosition(
-                target: _center,
-                zoom: 13.5,
+              initialCameraPosition: CameraPosition(
+                target: LatLng(userLat, userLng),
+                zoom: 14,
               ),
-              markers: _markers.values.toSet(),
+              markers: markers.values.toSet(),
+              onMapCreated: (controller) {
+                mapController = controller;
+              },
             ),
           ),
           Container(
             width: double.infinity,
             color: Colors.white,
             padding: const EdgeInsets.all(16),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Delivery progress',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 LinearProgressIndicator(
-                  value: 0.66,
-                  backgroundColor: Color(0xFFE5E7EB),
-                  valueColor: AlwaysStoppedAnimation(AppTheme.primary),
+                  value: (30 - order.eta) / 30,
+                  backgroundColor: const Color(0xFFE5E7EB),
+                  valueColor: const AlwaysStoppedAnimation(AppTheme.primary),
+                  minHeight: 8,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
-                  'Driver is on the way. 18 minutes remaining.',
-                  style: TextStyle(color: AppTheme.muted),
+                  'Driver is on the way. ${order.eta} minutes remaining.',
+                  style: const TextStyle(color: AppTheme.muted),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Delivery to: ${order.deliveryAddress}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -1303,7 +1856,7 @@ class StatCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFFEAFBF3),
+                color: const Color(0xFFFFE5CC),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: AppTheme.primary),
